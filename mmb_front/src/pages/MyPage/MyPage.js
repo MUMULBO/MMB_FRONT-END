@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './MyPage.css';
 
 const MyPage = () => {
+
+    useEffect(() => {
+        // 화면 처음 렌더링 되자마자 axios로 내정보 받아오기
+        // method : get
+        // res : 내 정보
+    }, []);
+
     return (
         <div className='my_page'>
             <div className='my_page_quoin'>
