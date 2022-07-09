@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 import {Routes, Route} from 'react-router-dom'
 import LoginPage from './pages/LoginPage/LoginPage' //로그인페이지
 import MyPage from './pages/MyPage/MyPage' //마이페이지
