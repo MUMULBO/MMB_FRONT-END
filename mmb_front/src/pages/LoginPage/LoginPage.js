@@ -36,7 +36,7 @@ const LoginPage = () => {
 
     return (
         <div>
-             <div className='login-container'>
+            <div className='login-container'>
                 <div className='login-form'>
                     <div className='login-logo'>MUMULBO</div>
                     <br/>
