@@ -81,5 +81,3 @@ const PostModifyPage = () => {
 };
 
 export default PostModifyPage;
-
-
