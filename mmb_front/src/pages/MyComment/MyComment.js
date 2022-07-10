@@ -1,8 +1,25 @@
 import React from 'react';
 import './MyComment.css';
 import CommentForm from '../../component/commentForm/commentForm';
+import axios from 'axios'
 
 const Mycomment = () => {
+    const [mycommentarr, setMycommentarr] = useState([]);
+
+    const handleMycommentarr = (e) => {
+        setMycommentarr(e.currentTarget.value);
+    }
+
+    useEffect(()=>{
+        axios.post()
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    },[])
+
     return (
         <div className ='my_comment'>
             <div className = 'my_comment_box'>

@@ -1,8 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './MyPost.css';
 import PostList from '../../component/postForm/postForm';
+import axios from 'axios'
+
 
 const Mypost = () => {
+    const [mypostarr, setMypostarr] = useState([]);
+
+    const handleMypostarr = (e) => {
+        setMypostarr(e.currentTarget.value);
+    }
+
+    useEffect(()=>{
+        axios.post()
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    },[])
+
+
     return (
         <div className = 'my_post'>
             <div className = 'my_post_box'>

@@ -1,7 +1,6 @@
 import React from 'react';
 import './postForm.css';
 
-// 내가 쓴 질문글
 const postForm = () => {
     return (
         <div className = "mypostBigbox">
@@ -12,7 +11,7 @@ const postForm = () => {
                 <div className = 'mypostbox'>
                     <div className = 'post_middle'>
                         <div className = 'post_middle_top'>
-                            <div calssName = 'post_title'>대학수학 과제 도와주실 분 있나요ㅜㅜ</div>
+                            <div className = 'post_title_comment'>대학수학 과제 도와주실 분 있나요ㅜㅜ</div>
                         </div>
                         <div className = 'post_content'>올해 4학년인데요 제가 문과 출신이라 그런지 너무 힘들더...</div>
                     </div>
