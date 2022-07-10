@@ -63,12 +63,12 @@ const RegisterPage = () => {
         },[CerCode,checkCerCode])
 
     function nickname_check(){
-        axios.post('http://127.0.0.1:8000/auth/nick_check', {
+        axios.post('http://127.0.0.1:8000/authapp/auth/nick_check', {
             data: NickName,
         }).
         then((res)=>{ 
             //isDuplicated : true;
-            setIsDuplicated(res.isDuplicated);
+            setIsDuplicated(res.data.isDuplicated);
             setNickDup("확인")
             console.log(res);
         }).
@@ -77,19 +77,19 @@ const RegisterPage = () => {
 
     function email_check(){
         //이메일 전송
-        axios.post('http://127.0.0.1:8000/auth/email_check', {
+        axios.post('http://127.0.0.1:8000/authapp/auth/email_check', {
             email: Email,
         }).
         then((res)=>{
             //code : "123dsqs"
-            setCerCode(res.code);
+            setCerCode(res.data.code);
             console.log(res);
         }).
         catch((err)=>{console.log(err)});
     }
 
     function sign_up(){
-        axios.post('authapp/auth/signup',{            
+        axios.post('http://127.0.0.1:8000/authapp/auth/signup',{            
                 nickname : NickName,
                 email: Email,
                 password: password,
@@ -97,23 +97,12 @@ const RegisterPage = () => {
                 major: Selected,
         })
         .then((res)=>{
-            setIsComplete(res.isComplete)
+            setIsComplete(res.data.isComplete)
             navigate('/PostListPage')
             //글목록페이지로 넘어가기
         })
         .catch((err)=>{console.log(err)})
     }
-
-    function nickname_check(){
-        axios.post('http://127.0.0.1:8000/authapp/auth/nick_check/', {
-            nickname: NickName,
-        }).
-        then((res)=>{
-            console.log(res);
-        }).
-        catch((err)=>{console.log(err)});
-    }
-
     return (
         <div className='register-container'>
             <div className='register-form'>
@@ -206,7 +195,7 @@ const RegisterPage = () => {
 
             {/* 회원 등록 과정 */}
             {/* 버튼 눌렀을 때 닉네임 인증, 이메일 인증, 비밀번호 인증이 끝났을 시 회원 등록 요청 */}
-            <button className="register-btns" type = "submit" className = "Register"
+            <button className="register-btns Register" type = "submit" 
             onClick={()=>{
                 if(isDuplicated && isEmail && isPassword && isPasswordConfirm){
                         sign_up();
