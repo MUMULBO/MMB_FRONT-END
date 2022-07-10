@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import './LoginPage.css';
-import axios from 'axois'
+import axios from 'axios'
 
 const LoginPage = () => {
     const [id, setId] = useState('');
@@ -24,18 +24,18 @@ const LoginPage = () => {
         })
         .then((res)=>{
             //로그인 성공 시 토큰 저장 및 화면 이동
-            window.localStorage.setItem(token,res.data.token)
-            navigate('/PostListPage')
+            localStorage.setItem('login-token',res.data.token)
+            navigate('/')
         })
         .catch((err)=>{console.log(err)})
     }
 
-    const handleCheckBox = () => {
-        setIsChecked(!isChecked);
-    }
+    // const handleCheckBox = () => {
+    //     setIsChecked(!isChecked);    
+    // }
 
     const onClickSignup = () => {
-        navigate("/RegisterPage");
+        navigate("/register");
     }
 
     return (
