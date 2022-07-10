@@ -1,0 +1,64 @@
+.comment_post{
+    margin-left:10px;
+    font-size:15px;
+}
+.mycommentBigbox{
+    border-bottom: 2px solid #E6E6E6;
+    display:flex;
+    justify-content: space-between;
+}
+
+.mycommentbox{
+    display:flex;
+
+}
+
+.comment_date{
+    font-size:15px;
+    color:#4891FF;
+    margin-left:8px;
+}
+
+.comment_time{
+    font-size:15px;
+    color:#4891FF;
+    margin-left:8px;
+}
+
+.comment_middle{
+    margin-top:9px;
+    margin-bottom:9px;
+    width:auto;
+}
+
+.comment_middle_top{
+    width: 100%;
+    display: flex;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.post_title{
+    margin-top:5px;
+    margin-left:10px;
+    margin-bottom:10px;
+    font-size: 13px;
+    color:#999999
+
+}
+
+.right_datetime{
+    display: flex;
+    margin: 10px;
+    width: 100px;
+}
+
+.check{
+    display:flex;
+    width: 27px;
+    height: 26.35px;
+    margin-top:18px;
+    margin-bottom:18px;
+    margin-left: 10px
+}
+
