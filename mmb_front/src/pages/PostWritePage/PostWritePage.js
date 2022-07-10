@@ -141,7 +141,7 @@ const PostWritePage = () => {
             <div className = "Modify-container">
                 {/* 카테고리 선택 */}
                 <select className = "select" onChange={handleSelect} value={Selected}>
-                        <option>카테고리 선택</option>
+                        <option disabled>카테고리 선택</option>
                         {selectList.map((item,i) => (
                         <option value={item} key={i}>
                         {console.log(Selected)}
@@ -150,7 +150,8 @@ const PostWritePage = () => {
                 </select>
                 <div className ="Write-bigbox">
                     <input className="title-input" type='text' placeholder='제목' 
-                    onClick={((e)=>{setTitle(e.currentTarget.value)})}></input>
+                    onChange={(e)=>{setTitle(e.currentTarget.value)}}></input>
+                    {console.log(title)}
                     <textarea
                         type='text'
                         className='text-area'
@@ -159,6 +160,7 @@ const PostWritePage = () => {
                         onChange={checkItemChangeHandler}
                         style={{height: ((textareaHeight + 1) * 27) + 'px'}} 
                     />
+                    {console.log(checkItemContent)}
                     <div className = "preview">
                         {images}  
                     </div>
