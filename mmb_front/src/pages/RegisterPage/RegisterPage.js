@@ -54,7 +54,7 @@ const RegisterPage = () => {
         },[password,password2])
 
         useEffect(()=>{
-            if(CerCode === checkCerCode){
+            if(parseInt(CerCode) === parseInt(checkCerCode)){
                 setSameCode(true);
             }
             else{
