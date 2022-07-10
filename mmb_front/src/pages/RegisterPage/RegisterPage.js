@@ -64,11 +64,11 @@ const RegisterPage = () => {
 
     function nickname_check(){
         axios.post('http://127.0.0.1:8000/authapp/auth/nick_check', {
-            data: NickName,
+            nickname : NickName,
         }).
         then((res)=>{ 
             //isDuplicated : true;
-            setIsDuplicated(res.data.isDuplicated);
+            //setIsDuplicated(res.data.isDuplicated);
             setNickDup("확인")
             console.log(res);
         }).
@@ -82,7 +82,7 @@ const RegisterPage = () => {
         }).
         then((res)=>{
             //code : "123dsqs"
-            setCerCode(res.data.code);
+            setCerCode(String(res.data.code));
             console.log(res);
         }).
         catch((err)=>{console.log(err)});
