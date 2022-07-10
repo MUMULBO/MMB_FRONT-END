@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import {useState} from 'react'
-import axios from 'axios'
+import axios from "axios";
 import './RegisterPage.css'
+import { PROXY } from '../../MyProxy';
+
 const RegisterPage = () => {
     //닉네임 : NickName / 중복이 확인되면 NickDup을 통해 확인으로 변경
     const [NickName, setNickName] = useState("");
@@ -45,6 +47,60 @@ const RegisterPage = () => {
         },[password,password2])
     const pwd_rule = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
 
+    function nickname_check(){
+
+        // axios({
+        //     method : 'post',
+        //     url : `${PROXY}/auth/nickcheck`,
+        //     data :{
+        //         nickname : NickName
+        //     },
+        //     headers:{
+        //         'ContentType' : 'application/json'
+        //     },
+        // }).
+        // axios({
+        //     method : 'post',
+        //     url : 'http://127.0.0.1:8000/auth/test/',
+        //     data :{
+        //         data: NickName,
+        //     },
+        //     headers:{
+        //         'ContentType' : 'application/json'
+        //     },
+        // }).
+        axios.post('http://127.0.0.1:8000/auth/test/', {
+            data: NickName,
+        }).
+        then((res)=>{
+            //요청 성공. 중복 및 금지어 체크 시 성공 가정!!
+            //이후 수정할 것!
+            // alert("reponse : yes")
+            // if(res.data.code == 0){
+            //     setNickDup("확인");
+
+            //     //중복 및 금지어가 아닐 경우 setIsName(true)
+            //     setIsName(true);
+            // }
+            // //요청 성공. 중복인 경우
+            // else{
+            //     if(res.data.code == 10000){
+            //         alert("ID가 중복됩니다.");
+            //     }
+            //     // 요청 성공. 금지어인 경우
+            //     else if(res.data.code == 10001){
+            //         let message = res.data.message;
+            //         alert(`${message}는 금지어입니다.`);
+            //     }
+            //     else{
+            //         alert("Error:");
+            //     }
+            // }
+            console.log(res);
+        }).
+        catch((err)=>{console.log(err)});
+    }
+
     return (
         <div className='register-container'>
             <div className='register-form'>
@@ -61,41 +117,7 @@ const RegisterPage = () => {
                     {console.log(NickName)}
                     <button id="btn1" onClick = {()=>{
                         //Nickname 전송
-                        axios({
-                            method : 'post',
-                            url : 'https://jsonplaceholder.typicode.com/posts',
-                            data :{
-                                nickname : NickName
-                            },
-                            headers:{
-                                'ContentType' : 'application/json'
-                            },
-                        }).
-                        then((res)=>{
-                            //요청 성공. 중복 및 금지어 체크 시 성공 가정!!
-                            //이후 수정할 것!
-                            alert("reponse : yes")
-                            if(res.data.code == 0){
-                                setNickDup("확인");
-
-                                //중복 및 금지어가 아닐 경우 setIsName(true)
-                                setIsName(true);
-                            }
-                            //요청 성공. 중복인 경우
-                            else{
-                                if(res.data.code == 10000){
-                                    alert("ID가 중복됩니다.");
-                                }
-                                // 요청 성공. 금지어인 경우
-                                else if(res.data.code == 10001){
-                                    let message = res.data.message;
-                                    alert(`${message}는 금지어입니다.`);
-                                }
-                                else{
-                                    alert("Error:");
-                                }
-                            }}).
-                        catch((err)=>{console.log(err)});
+                        nickname_check();
                         }}>{NickDup}</button>
                 </div>
             </div>
