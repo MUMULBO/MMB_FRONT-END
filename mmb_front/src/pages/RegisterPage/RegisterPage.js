@@ -53,6 +53,15 @@ const RegisterPage = () => {
             }
         },[password,password2])
 
+        useEffect(()=>{
+            if(CerCode === checkCerCode){
+                setSameCode(true);
+            }
+            else{
+                setSameCode(false);
+            }
+        },[CerCode,checkCerCode])
+
     function nickname_check(){
         axios.post('http://127.0.0.1:8000/auth/nick_check', {
             data: NickName,
@@ -96,54 +105,10 @@ const RegisterPage = () => {
     }
 
     function nickname_check(){
-
-        // axios({
-        //     method : 'post',
-        //     url : `${PROXY}/auth/nickcheck`,
-        //     data :{
-        //         nickname : NickName
-        //     },
-        //     headers:{
-        //         'ContentType' : 'application/json'
-        //     },
-        // }).
-        // axios({
-        //     method : 'post',
-        //     url : 'http://127.0.0.1:8000/auth/test/',
-        //     data :{
-        //         data: NickName,
-        //     },
-        //     headers:{
-        //         'ContentType' : 'application/json'
-        //     },
-        // }).
         axios.post('http://127.0.0.1:8000/authapp/auth/nick_check/', {
             nickname: NickName,
         }).
         then((res)=>{
-            //요청 성공. 중복 및 금지어 체크 시 성공 가정!!
-            //이후 수정할 것!
-            // alert("reponse : yes")
-            // if(res.data.code == 0){
-            //     setNickDup("확인");
-
-            //     //중복 및 금지어가 아닐 경우 setIsName(true)
-            //     setIsName(true);
-            // }
-            // //요청 성공. 중복인 경우
-            // else{
-            //     if(res.data.code == 10000){
-            //         alert("ID가 중복됩니다.");
-            //     }
-            //     // 요청 성공. 금지어인 경우
-            //     else if(res.data.code == 10001){
-            //         let message = res.data.message;
-            //         alert(`${message}는 금지어입니다.`);
-            //     }
-            //     else{
-            //         alert("Error:");
-            //     }
-            // }
             console.log(res);
         }).
         catch((err)=>{console.log(err)});
@@ -193,12 +158,6 @@ const RegisterPage = () => {
 
                     {/* 인증버튼을 눌렀을 때 전달 받은 코드와 작성한 코드가 같다면 setSameCode 가 true 아니면 false */}
                     <button id="btn3" onClick={()=>{
-                        if(CerCode === checkCerCode){
-                            setSameCode(true);
-                        }
-                        else{
-                            setSameCode(false);
-                        }
                         setSameCode === true ? alert("인증성공") : alert("인증 실패");
                         //setIsEmail(true) : 이메일 인증 성공
                         setIsEmail(true);

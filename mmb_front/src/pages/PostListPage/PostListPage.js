@@ -184,39 +184,5 @@ function Search(props){ // props : postList, inputList
     );
 }
 
-function List(props){
-    return(
-        <div className = "Lists">
-            {/* 상위에서 필터링된 데이터를 props로 받아서 출력 디폴트가 전체 */}
-                {
-                    props.postList.map((e,i)=>{
-                        return(
-                            <div  className = "List" key = {i} onClick ={()=>{
-                                //해당 상세피이지로 이동
-                                console.log(i);
-                            }}>
-                                <div className = "ListNum">3{e.point}</div>
-                                <div className = "ListContent">
-                                    <ul className = "ListList">
-                                        {/* //나중에 데이터형식 확인하고 수정할 부분 */}
-                                        <li>대학수학 과제 도와주실분 있나요 ㅠㅠ{e.title}</li>
-                                        <li>올해 4학년인데요 제가 문과 출신이라 그런지 너무 힘들더..{e.내용}</li>
-                                        <div className = "ListLast">
-                                            <div className = "ListLast2">
-                                                <li>컴퓨터공학과{e.catergory}</li>
-                                                <div className = "detail">
-                                                    <li><img src = "images/JPG.png"  className = "imageIcon"/>{e.countJPG}2</li>
-                                                    <li><img src = "images/Comment.png"/>{e.countComment}14</li>
-                                                    <li>07-07 15:34{e.date}</li>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ul>
-                                </div>
-                            </div>
-                )})                    
-                }
-            </div>
-    );
-}
+
 export default PostListPage;
