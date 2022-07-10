@@ -9,7 +9,7 @@ const PostWritePage = () => {
     //전공선택
     const [Selected, setSelected] = useState("");
     //익명선택
-    const [is_anony,setis_anony] = useState(true);
+    const [is_anony,setis_anony] = useState(false);
     //제목
     const [title,setTitle] = useState("");
     //내용
@@ -18,11 +18,12 @@ const PostWritePage = () => {
     const [img_src,setImg_src] = useState([]);
     //토큰
     const [token,setToken] = useState([]);
-    //포인트
+    //사용자 사용 포인트
     const [post_point,setPost_point] = useState(1);
     //글 작성 완료 여부
     const [is_post,setIs_post] = useState(false);
-
+    //전공 아이디값
+    const [major_id,setMajor_id] = useState(1);
     //사용자 보유 포인트
     const [user_point,setUser_point] = useState(0);
     //페이지 시작 시 사용자 보유 포인트 가져오기
@@ -39,9 +40,11 @@ const PostWritePage = () => {
 
     const pointList = [1,2,3,4,5,6,7,8,9,10];
 
-    //Seleted값이 바뀌었을 때 해당 값으로갱신
+    //Seleted값이 바뀌었을 때 해당 값으로갱신 + major_id 값 설정 일상 : 1 ~
     const handleSelect = (e) => {
             setSelected(e.target.value);
+            setMajor_id(e.currentTarget.selectedIndex);
+            console.log(e.currentTarget.selectedIndex);
         };
 
     //이미지 코드
@@ -60,7 +63,6 @@ const PostWritePage = () => {
     }
 
     const handleImageUpload = (e) => {
-    
         const fileArr = e.target.files;
         let fileURLs = [];
         let file;
@@ -81,12 +83,26 @@ const PostWritePage = () => {
 
     // 완료 시 호출되는 함수
     const onClickModified = () => {
-        // method : post
-        // req : 글 id, 글 제목, 글 내용, 사진들 
-        // res : 완료
-        // 글 수정 성공시 글 상세페이지로 이동
-        navigate("/");
-    }
+        //토큰 localStorage에서 가져오기!
+        token = localStorage.getItem('login-token');
+        axios.post('http://127.0.0.1:8000/postsapp/upload/post',{
+            title : title,
+            description : checkItemContent,
+            image_src : img_src,
+            major_id : major_id,
+            is_anony : is_anony,
+            token : token,
+            post_point : post_point
+    })
+    .then((res)=>{
+        //이후 수정할 부분
+        setIs_post(true);
+        navigate("/detail");
+    })
+    .catch((err)=>{
+        console.log(err);
+        setIs_post(false);
+    })}
     
     useEffect(() => {
         const imgArr = [];
@@ -102,7 +118,7 @@ const PostWritePage = () => {
         setImages(imgArr);
     }, [detailImgs]);
 
-   const removeImage = (e) => {
+    const removeImage = (e) => {
         setDetailImgs(detailImgs.filter(image => image != e.target.value));
     };
 
@@ -125,7 +141,7 @@ const PostWritePage = () => {
             <div className = "Modify-container">
                 {/* 카테고리 선택 */}
                 <select className = "select" onChange={handleSelect} value={Selected}>
-                    <option>카테고리 선택</option>
+                        <option>카테고리 선택</option>
                         {selectList.map((item,i) => (
                         <option value={item} key={i}>
                         {console.log(Selected)}
@@ -133,7 +149,8 @@ const PostWritePage = () => {
                     </option>))}
                 </select>
                 <div className ="Write-bigbox">
-                    <input className="title-input" type='text' placeholder='제목'></input>
+                    <input className="title-input" type='text' placeholder='제목' 
+                    onClick={((e)=>{setTitle(e.currentTarget.value)})}></input>
                     <textarea
                         type='text'
                         className='text-area'
