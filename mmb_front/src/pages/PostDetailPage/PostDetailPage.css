@@ -1,0 +1,70 @@
+.detail-container {
+    min-width: 270px;
+    max-width: 400px;
+    background-color: aquamarine;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-header {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail-header > div {
+    width: 20px;
+}
+
+.detail-header > span {
+    color: #4891FF;
+}
+
+.detail-content {
+    width: 100%;
+}
+
+.detail-title {
+    margin: 0 10px;
+    height: 50px;
+    border-bottom: 2px solid #979797;
+    display: flex;
+}
+
+#point {
+    width: 20%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #4891FF;
+}
+
+.detail-post-content {
+    width: 85%;
+    margin: 20px auto;
+    min-height: 200px;
+}
+
+.scroll-horizontal {
+    width: 90%;
+    height: auto;
+    min-height: 100px;
+    background-color: #979797;
+    margin: 0 auto;
+}
+
+#nickName {
+    color: #4891FF;
+    font-size: 13px;
+
+}
+
+#detail-post-title {
+    font-weight: bolder;
+    font-size: 17px;
+}
+

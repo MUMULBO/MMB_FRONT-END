@@ -12,14 +12,14 @@ import RegisterPage from './pages/RegisterPage/RegisterPage' //회원가입페�
 const App = () => {
   return (
     <Routes>
-      <Route path = "/LoginPage" element = {<LoginPage/>}/>
-      <Route path = "/RegisterPage" element = {<RegisterPage/>}/>
+      <Route path = "/login" element = {<LoginPage/>}/>
+      <Route path = "/register" element = {<RegisterPage/>}/>
       <Route path = "/" element = {<PostListPage/>}/>
-      <Route path = "/Detail" element = {<PostDetail/>}/>
+      <Route path = "/detail" element = {<PostDetail/>}/>
       {/* pageId:게시글 순번입니다! */}
-      <Route path = "/PostModifyPage" element = {<PostModifyPage/>}/>
-      <Route path = "/MyPage" element = {<MyPage/>}/>
-      <Route path = "/PostWritePage" element = {<PostWritePage/>}/>
+      <Route path = "/modify" element = {<PostModifyPage/>}/>
+      <Route path = "/myPage" element = {<MyPage/>}/>
+      <Route path = "/postWrite" element = {<PostWritePage/>}/>
       <Route path = "*" element = {<p>잘못된 페이지입니다.</p>}/>
     </Routes>
   );
