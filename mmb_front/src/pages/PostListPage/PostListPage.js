@@ -183,6 +183,7 @@ function Search(props){ // props : postList, inputList
 }
 
 function List(props){
+    const navigate  = useNavigate();
     return(
         <div className = "Lists" >
             {/* 상위에서 필터링된 데이터를 props로 받아서 출력 디폴트가 전체 */}
@@ -191,7 +192,7 @@ function List(props){
                         return(
                             <div  className = "List" key = {i} onClick ={()=>{
                                 //해당 상세피이지로 이동
-                                navgiate(`http://127.0.0.1:8000/postsapp/detail/${e.id}`)
+                                navigate(`http://127.0.0.1:8000/postsapp/detail/${e.id}`)
                             }}>
                                 <div className = "ListNum">3{e.point}</div>
                                 <div className = "ListContent">
