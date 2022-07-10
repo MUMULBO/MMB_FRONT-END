@@ -16,7 +16,7 @@ const PostListPage = () => {
     //  setPostList롤 최신순으로 정렬된 데이터로 postList 생성
     useEffect(()=>{
         // 최신순 데이터 url로 교체 
-        axios.get('http://127.0.0.1:8000/postapp/point=')
+        axios.get('http://127.0.0.1:8000/Postsapp/post/?point=&keyword=&major_id=')
         .then((res)=>{setPostList(res)})
         .catch((err)=>{console.log(err)});
     },[]);

@@ -41,7 +41,7 @@ const RegisterPage = () => {
 
     const handleSelect = (e) => {
         setSelected(e.target.value);
-        setMajor_id(e.currentTarget.selectedIndex + 1);
+        setMajor_id(e.currentTarget.selectedIndex + 2);
     };
 
         useEffect(()=>{
