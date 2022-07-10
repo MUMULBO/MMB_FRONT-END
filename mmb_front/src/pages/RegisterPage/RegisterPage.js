@@ -46,7 +46,8 @@ const RegisterPage = () => {
     const pwd_rule = /^(?=.*[a-zA-Z])((?=.*\d)(?=.*\W)).{8,20}$/;
 
     return (
-        <div>
+        <div className='register-container'>
+            <div className='register-form'>
             <div className = "MU">
                 <p className = "MULBO">MUMULBO</p>
             </div>
@@ -54,11 +55,11 @@ const RegisterPage = () => {
             <div className = "title">닉네임</div>
             <div className = "NickName">
                 <div className = "NickNameCer">
-                    <input className = "NickNameInput" placeholder = "닉네임"
+                    <input className = "NickNameInput" placeholder = "  닉네임"
                     onChange = {(e)=>{setNickName(e.target.value)}}></input>
-                    {/* testcode 나중에지우기 */}
+                    {/* testcode 나중에 지우기 */}
                     {console.log(NickName)}
-                    <button onClick = {()=>{
+                    <button id="btn1" onClick = {()=>{
                         //Nickname 전송
                         axios({
                             method : 'post',
@@ -102,12 +103,12 @@ const RegisterPage = () => {
             <div className = "Email">
                 <div className = "title">이메일</div>
                 <div className = "EmailCer">
-                    <input className = "email" placeholder = "이메일"
+                    <input className = "email" placeholder = "  이메일"
                     onChange = {(e)=>{setEmail(e.target.value)}}></input>
                     {/* testcode 나중에 지울것 */}
                     {console.log(Email)}
-                    <span className = "kumoh">@Kumoh.ac.kr</span>
-                    <button onClick={()=>{
+                    <span className = "kumoh">@kumoh.ac.kr</span>
+                    <button id="btn2" onClick={()=>{
                         //이메일 전송!
                         axios({
                             method : 'post',
@@ -140,7 +141,7 @@ const RegisterPage = () => {
                     {console.log(checkCerCode)}
 
                     {/* 인증버튼을 눌렀을 때 전달 받은 코드와 작성한 코드가 같다면 setSameCode 가 true 아니면 false */}
-                    <button onClick={()=>{
+                    <button id="btn3" onClick={()=>{
                         if(CerCode === checkCerCode){
                             setSameCode(true);
                         }
@@ -157,7 +158,7 @@ const RegisterPage = () => {
             {/* 비밀번호 확인 과정 */}
             <div className = "Password">
                 <div className = "title">패스워드</div>
-                    <input type = "password" className = "password" placeholder = "숫자, 영문, 특수문자 조합 최소 8자"
+                    <input type = "password" className = "password" placeholder = "   숫자, 영문, 특수문자 조합 최소 8자"
                     onChange = {(e)=>{
                         setPassword(e.currentTarget.value);
                         {console.log(password)}
@@ -170,11 +171,10 @@ const RegisterPage = () => {
                             setIsPassword(false);
                         }
                         }}}></input>
-                        
                         <div>{password}</div>
                         <div>{passwordAlert}</div>
 
-                    <input type = "password" className = "password2" placeholder = "비밀번호 재입력"
+                    <input type = "password" className = "password2" placeholder = "   비밀번호 재입력"
                     onChange={(e)=>{
                         setPassword2(e.currentTarget.value);
                         {console.log("1 :", password, "2 : ", password2)}
@@ -186,13 +186,13 @@ const RegisterPage = () => {
             {/* 전공 확인 과정 */}
             <div className = "Major">
                 <div className = "title">전공</div>
-                <select className = "select" onChange={handleSelect} value={Selected}>
+                <select className = "selectBox" onChange={handleSelect} value={Selected}>
                             {selectList.map((item,i) => (
                             <option value={item} key={i}>
                                 {console.log(Selected)}
                                 {item}
                             </option>))}
-                        </select>
+                </select>
             </div>
 
             {/* 회원 등록 과정 */}
@@ -237,6 +237,7 @@ const RegisterPage = () => {
                     console.log(password);
                     console.log(password2);
             }}>가입완료</button>
+            </div>
         </div>
     );
 };
