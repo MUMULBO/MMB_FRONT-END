@@ -17,7 +17,7 @@ const App = () => {
       <Route path = "/" element = {<PostListPage/>}/>
       <Route path = "/detail" element = {<PostDetail/>}/>
       {/* pageId:게시글 순번입니다! */}
-      <Route path = "/postModify" element = {<PostModifyPage/>}/>
+      <Route path = "/modify" element = {<PostModifyPage/>}/>
       <Route path = "/myPage" element = {<MyPage/>}/>
       <Route path = "/postWrite" element = {<PostWritePage/>}/>
       <Route path = "*" element = {<p>잘못된 페이지입니다.</p>}/>
