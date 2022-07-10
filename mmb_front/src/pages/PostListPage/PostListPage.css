@@ -1,0 +1,184 @@
+html{
+    width : 100%;
+    height : 100%;
+  }
+  body{
+    width : 40%;
+    height : 70%;
+    text-align: center;
+    margin : 0 auto;
+    overflow: hidden;
+    z-index: 1;
+  }
+  #align{
+    white-space : nowrap;
+    font-size : 0;
+  }
+  #align input{
+    display : none;
+  }
+  #align label{
+    display : inline-block;
+    margin : -2px 0 0;
+    font-size : 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align:center;
+    width:60px;
+    height:20px;
+    border: 2px solid #4891FF;
+    border-radius: 8px;
+  }
+  #align label:nth-child(2) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  #align label:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+.btn{
+  opacity : 0;
+}
+.btn>label{
+  border-radius: 3px;
+}
+input[type=radio]:checked + label{
+  outline : 0;
+  background-color: #4891FF;
+  color:white;
+}
+  .Search{
+    display : flex;
+    background-color: #4891FF;
+    color : white;
+    height : 4em;
+    align-items: center;
+    width : 100%;
+    justify-content: space-between;
+  }
+.filter2{
+  width : 30%;
+}
+.SearchBar{
+  display : flex;
+  width : 60%;
+}
+.searchbar{
+  border-radius: 8px;
+  font-size : 18px;
+  width : 100%;
+  border : none;
+}
+.SearchIcon{
+  margin-right : 1em;
+}
+.select{
+  border-radius: 8px;
+  margin-left : 1em;
+  color :#4891FF;
+  width : 80%;
+  font-size: 18px;
+  text-align: center;
+  border:none;
+}
+  .ListContent{
+    width : 85%;
+    border-bottom: 2px solid #E6E6E6;
+    padding-left: 0;
+    padding-right : 5px;
+  }
+  .ListNum{
+    width : 15%;
+    display : flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 40px;
+    color :#4891FF;
+    border-bottom: 2px solid #E6E6E6;
+  }
+  li{
+    list-style-type: none;
+    text-align: left;
+    padding-bottom : 2px;
+  }
+  .ListList{
+    display : flex;
+    flex-direction: column;
+    height : 70%;
+  }
+
+  .filter{
+    display : flex;
+    justify-content: space-around;
+  }
+  .Lists{
+    background-color : #FFFFFF;
+    height : 500px;
+    overflow-y: auto;
+    white-space: nowrap;
+  }
+  
+  .List{
+    display : flex;
+  }
+  .List:hover{
+    color : #96D9FF;
+  }
+  
+  .ListLast{
+    display :flex;
+    justify-content: space-between;
+  }
+  .ListLast2{
+    width : 100%;
+    justify-content: space-between;
+    display : flex;
+    color : #4891FF;
+  }
+  .post{
+    background-color: white;
+    color : #4891FF;
+    border : 3px solid;
+    border-color: #4891FF;
+    border-radius: 30px;
+    font-size : 20px;
+    position: fixed;
+    right : 35em;
+    bottom : 12em;
+    z-index: 100;
+  }
+  .post:hover{
+    background-color: #96D9FF;
+  }
+  
+.head{
+    display : flex;
+    background-color: #FFFFFF;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #4891FF;
+    height : 4em;
+    color :  #4891FF;
+    padding-left : 1em;
+    font-size : 15px;
+    border-bottom : 2px solid #4891FF;
+  }
+.MUMULBO{
+  font-size : 25px;
+}
+.icon{
+  display : flex;
+  align-items: center;
+  justify-content: space-between;
+  width : 12%;
+}
+.imageIcon{
+  height : 13px;
+}
+.detail{
+  display :flex;
+  width : 35%;
+  justify-content: space-between;
+}
