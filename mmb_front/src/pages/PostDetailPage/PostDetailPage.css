@@ -5,9 +5,12 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 }
 
 .detail-header {
+    max-width: 500px;
+    margin: 0 auto;
     width: 100%;
     height: 50px;
     display: flex;
@@ -21,6 +24,11 @@
 
 .detail-header > span {
     color: #4891FF;
+}
+
+.detail-header > button {
+    background-color: #ffffff;
+    border: none;
 }
 
 .detail-content {
@@ -68,3 +76,11 @@
     font-size: 17px;
 }
 
+.search-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #4891FF;
+}

@@ -69,8 +69,8 @@ const RegisterPage = () => {
         //         'ContentType' : 'application/json'
         //     },
         // }).
-        axios.post('http://127.0.0.1:8000/auth/test/', {
-            data: NickName,
+        axios.post('http://127.0.0.1:8000/authapp/auth/nick_check/', {
+            nickname: NickName,
         }).
         then((res)=>{
             //요청 성공. 중복 및 금지어 체크 시 성공 가정!!
@@ -254,7 +254,7 @@ const RegisterPage = () => {
                         alert("비밀번호가 같지 않습니다.");
                     }
                     else{
-                        alert("뭔가가 잘못됬습니다...");
+                        alert("뭔가가 잘못됬습니다…");
                     }}
                     console.log(password);
                     console.log(password2);

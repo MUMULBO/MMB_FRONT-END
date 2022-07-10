@@ -1,4 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import './PostModifyPage.css';
 
 const PostModifyPage = () => {
@@ -8,6 +9,8 @@ const PostModifyPage = () => {
     const [images, setImages] = useState();
     const [checkItemContent, setCheckItemContent] = useState(''); // 수정한 글 내용
     const [textareaHeight, setTextareaHeight] = useState(0);
+
+    const navigate = useNavigate();
 
     // 사용자 입력 값이 변경될 때마다 checkItemContent에 저장하고
     // 엔터('\n') 개수를 세서 textareaHeight에 저장
@@ -42,6 +45,7 @@ const PostModifyPage = () => {
         // req : 글 id, 글 제목, 글 내용, 사진들 
         // res : 완료
         // 글 수정 성공시 글 상세페이지로 이동
+        navigate("/");
     }
     
     useEffect(() => {
