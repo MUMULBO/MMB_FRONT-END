@@ -1,3 +1,18 @@
+.Post-List-Box {
+    width: 60%;
+    height: 100vh;
+    margin: 0 auto;
+    min-width: 270px;
+    max-width: 500px;
+}
+
+#post-list-header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
 #align{
     white-space : nowrap;
     font-size : 0;
@@ -64,7 +79,7 @@ input[type=radio]:checked + label{
 .SearchIcon{
   margin-right : 1em;
 }
-.select{
+.select-box{
   border-radius: 8px;
   margin-left : 1em;
   color :#4891FF;
@@ -74,9 +89,8 @@ input[type=radio]:checked + label{
   border:none;
 }
   .ListContent{
-    width : 85%;
+    width: 85%;
     border-bottom: 2px solid #E6E6E6;
-    padding-left: 0;
     padding-right : 5px;
   }
   .ListNum{
@@ -84,19 +98,16 @@ input[type=radio]:checked + label{
     display : flex;
     align-items: center;
     justify-content: space-around;
-    font-size: 40px;
+    font-size: 3em;
     color :#4891FF;
     border-bottom: 2px solid #E6E6E6;
   }
   li{
     list-style-type: none;
-    text-align: left;
     padding-bottom : 2px;
   }
   .ListList{
-    display : flex;
-    flex-direction: column;
-    height : 70%;
+    height : auto;
   }
 
   .filter{
@@ -105,9 +116,8 @@ input[type=radio]:checked + label{
   }
   .Lists{
     background-color : #FFFFFF;
-    height : 500px;
+    height : 100vh;
     overflow-y: auto;
-    white-space: nowrap;
   }
   
   .List{
@@ -143,21 +153,24 @@ input[type=radio]:checked + label{
     background-color: #96D9FF;
   }
   
-.head{
+.Post-List-Box > .head{
     display : flex;
     background-color: #FFFFFF;
     justify-content: space-between;
     align-items: center;
     border-bottom: #4891FF;
-    height : 4em;
+    height: 65px;
     color :  #4891FF;
     padding-left : 1em;
     font-size : 15px;
     border-bottom : 2px solid #4891FF;
+
   }
+
 .MUMULBO{
   font-size : 25px;
 }
+
 .icon{
   display : flex;
   align-items: center;

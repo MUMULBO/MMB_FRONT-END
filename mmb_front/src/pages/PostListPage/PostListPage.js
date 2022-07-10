@@ -24,7 +24,7 @@ const PostListPage = () => {
     let [input,setInput] = useState(""); 
 
     return (
-        <div>
+        <div className='Post-List-Box'>
             {/* //헤더부분 */}
             <header className = "head">
                 {/* 최신, 포인트순 필터 */}
@@ -88,7 +88,7 @@ function Filter1(props){ //디폴트가 최신순으로 선택시 postList 바�
         }
     }
     return(
-        <div>
+        <div id='post-list-header-container'>
         {/* 최신순 포인트순 선택 */}
             <div className = "filter1" id = "align">
                 <form id = "align">
@@ -142,7 +142,7 @@ function Search(props){ // props : postList, inputList
             <div className = "Search">
                     {/* 일상 및 학과 선택 */}
                     <div className = "filter2"> 
-                        <select className = "select" onChange={handleSelect} value={Selected}>
+                        <select className = "select-box" onChange={handleSelect} value={Selected}>
                             <option value = "All">전체</option>
                             {selectList.map((item,i) => (
                             <option value={item} key={i}>
