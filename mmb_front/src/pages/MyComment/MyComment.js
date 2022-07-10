@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './MyComment.css';
 import CommentForm from '../../component/commentForm/commentForm';
 import axios from 'axios'

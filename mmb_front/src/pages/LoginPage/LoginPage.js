@@ -24,15 +24,11 @@ const LoginPage = () => {
         })
         .then((res)=>{
             //로그인 성공 시 토큰 저장 및 화면 이동
-            localStorage.setItem('login-token',res.data.token)
-            navigate('/')
+            localStorage.setItem('login-token',res.data.token);
+            navigate('/');
         })
         .catch((err)=>{console.log(err)})
     }
-
-    // const handleCheckBox = () => {
-    //     setIsChecked(!isChecked);    
-    // }
 
     const onClickSignup = () => {
         navigate("/register");
@@ -47,10 +43,6 @@ const LoginPage = () => {
                     <input className='login-inputs' placeholder='   이메일' value={id} onChange={handleId}/>
                     <input className='login-inputs' placeholder='   비밀번호' value={pw} onChange={handlePw}/>
                     <button className='login-login' onClick={onClickLogin}>로그인</button>
-                    {/* <div>
-                        <input type='checkbox' defaultChecked={isChecked} onClick={handleCheckBox}></input>
-                        <span style={{fontSize: "12px"}}>로그인 유지</span>
-                    </div><br/> */}
                     <button className='login-signup' onClick={onClickSignup}>회원가입</button>
                 </div>
             </div>  
