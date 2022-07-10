@@ -1,6 +1,7 @@
 import React from 'react';
 import './PostWritePage.css';
-import {useState,useRef,useEffect} from 'react'
+import {useState,useRef,useEffect} from 'react';
+import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const PostWritePage = () => {
@@ -38,7 +39,17 @@ const PostWritePage = () => {
     const selectFile = useRef("");
     const [detailImgs, setDetailImgs] = useState([]); // 이미지 url 담는 변수
     const [images, setImages] = useState();
+
+    // 
+    const [checkItemContent, setCheckItemContent] = useState(''); // 수정한 글 내용
+    const [textareaHeight, setTextareaHeight] = useState(0);
+    const navigate = useNavigate();
     
+    const checkItemChangeHandler = (event) => {
+        setTextareaHeight(event.target.value.split('\n').length - 1);
+        setCheckItemContent(event.target.value);
+    }
+
     const handleImageUpload = (e) => {
     
         const fileArr = e.target.files;
@@ -59,7 +70,14 @@ const PostWritePage = () => {
         }
     };
 
-    // console.log(detailImgs);
+    // 완료 시 호출되는 함수
+    const onClickModified = () => {
+        // method : post
+        // req : 글 id, 글 제목, 글 내용, 사진들 
+        // res : 완료
+        // 글 수정 성공시 글 상세페이지로 이동
+        navigate("/");
+    }
     
     useEffect(() => {
         const imgArr = [];
@@ -67,7 +85,7 @@ const PostWritePage = () => {
                 imgArr.push(
                         <div className='file-img-box'>
                             <img className = "file-img" src={ele}></img>
-                            <button className ="remove-Button" value={ele} onClick = {removeImage}>❌</button>
+                            <button className ="remove-Button" value={ele} onClick = {removeImage}>X</button>
                         </div>
                     );
             }
@@ -75,106 +93,79 @@ const PostWritePage = () => {
         setImages(imgArr);
     }, [detailImgs]);
 
-    const removeImage = (e) => {
+   const removeImage = (e) => {
         setDetailImgs(detailImgs.filter(image => image != e.target.value));
-
     };
 
     console.log(detailImgs);
 
     return (
-        <div className = "Modify-container">
-            <div className = "head">
+        <>
+            <div className = "Header">
                 <div><input type='checkbox' name='anonymous' value='anonymous'
-                onChange={((e)=>{
-                    e.target.checked ? setis_anony(true) : setis_anony(false);
-                })}/><span class = "ano">익명</span></div>
-                <div className = "MUMULBO">글 작성하기</div>
-                <button className = "complete" onClick={()=>{
-                    axios({
-                        method : 'post',
-                        //임의 url
-                        url : 'https://jsonplaceholder.typicode.com/posts',
-                        data : {
-                            title : title,
-                            description : description,
-                            image_src : img_src,
-                            major_id : Selected,
-                            is_anony : is_anony,
-                            token : token,
-                            post_point : post_point
-                        }
-                    })
-                    .then((res)=>{
-                        //이후 수정할 부분
-                        setIs_post(true);
-                    })
-                    .catch((err)=>{
-                        console.log(err);
-                        setIs_post(false);
-                    })
-                }}>완료</button>
-            </div>
-            {/* 카테고리 선택 */}
-            <select className = "select" onChange={handleSelect} value={Selected}>
-                <option>카테고리 선택</option>
-                    {selectList.map((item,i) => (
-                    <option value={item} key={i}>
-                    {console.log(Selected)}
-                    {item}
-                </option>))}
-            </select>
-            {/* 제목
-            <input className = "title" type = "text" placeholder='제목'
-            onChange={(e)=>{
-                setTitle(e.currentTarget.value);
-                console.log(title);
-            }}></input> */}
-            {/* 질문 내용 */}
-            {/* <input className = "question" type = "textArea" placeholder='질문을 입력해주세요'
-            onChange={(e)=>{
-                setDescription(e.currentTarget.value);
-                console.log(description);
-            }}></input> */}
-
-            {/* 민경님 코드로 대체 */}
-            <div className ="Write-bigbox">
-                <input className="title-input" type='text' placeholder='제목'></input>
-                <input className="text-area" type='text'  placeholder='내용'></input>
-                <div className = "preview">
-                    <div className = "imgs">
-                        {images} 
-                    </div>   
+                    onChange={((e)=>{
+                        e.target.checked ? setis_anony(true) : setis_anony(false);
+                    })}/><span className = "ano">익명</span></div>
+                <div className ="p">
+                    글 작성하기
                 </div>
-                <input className="img-submit" type="file" multiple ref={selectFile} onChange={handleImageUpload}/>
-                <button className = "imgBtn" onClick={() => selectFile.current.click()}><img src = "./JPG.png"  className = "imageIcon"/>사진 첨부하기</button>
+                <div className = "complete-button">
+                    <button onClick={onClickModified} className = "button1">완료</button>
+                </div>
             </div>
-            {/* 이미지코드 */}
-
-            {/* 포인트부분 */}
-            <div className = "footer">
-                <div className = "PointDiv">
-                    <div className = "PointIcon">P</div>
-                    <div className = "PointContent">
-                        <div className = "pointpoint">
-                        <select className = "pointSelect" 
-                            onChange={(e)=>{
-                                setPost_point(e.currentTarget.value)
-                                console.log(post_point)
-                            }}>
-                            {pointList.map((item,i) => (
-                            <option value={item} key={i}>
-                                {console.log(Selected)}
-                                {item}
-                            </option>))}
-                        </select>
-                            <span className = "point"></span>
+            <div className = "Modify-container">
+                {/* 카테고리 선택 */}
+                <select className = "select" onChange={handleSelect} value={Selected}>
+                    <option>카테고리 선택</option>
+                        {selectList.map((item,i) => (
+                        <option value={item} key={i}>
+                        {console.log(Selected)}
+                        {item}
+                    </option>))}
+                </select>
+                <div className ="Write-bigbox">
+                    <input className="title-input" type='text' placeholder='제목'></input>
+                    <textarea
+                        type='text'
+                        className='text-area'
+                        value={checkItemContent}
+                        placeholder={'글 작성하기'}
+                        onChange={checkItemChangeHandler}
+                        style={{height: ((textareaHeight + 1) * 27) + 'px'}} 
+                    />
+                    <div className = "preview">
+                        {images}  
+                    </div>
+                    <input className="img-submit" type="file" multiple ref={selectFile} onChange={handleImageUpload}/>
+                    <button className="button2" onClick={() => selectFile.current.click()}>
+                        <img src='/img/image.png' style={{width:"20px"}}/>&nbsp;사진 첨부하기
+                    </button>
+                    {/* 포인트부분 */}
+                    <div className = "footer">
+                        <div className = "PointDiv">
+                            <div className = "PointIcon">P</div>
+                            <div className = "PointContent">
+                                <div className = "pointpoint">
+                                <select className = "pointSelect" 
+                                    onChange={(e)=>{
+                                        setPost_point(e.currentTarget.value)
+                                        console.log(post_point)
+                                    }}>
+                                    {pointList.map((item,i) => (
+                                    <option value={item} key={i}>
+                                        {console.log(Selected)}
+                                        {item}
+                                    </option>))}
+                                </select>
+                                    <span className = "point"></span>
+                                </div>
+                                <p className = "nowPoint">{`현재 포인트 ${post_point}point`}</p>
+                            </div>
                         </div>
-                        <p className = "nowPoint">{`현재 포인트 ${post_point}point`}</p>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

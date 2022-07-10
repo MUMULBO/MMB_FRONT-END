@@ -12,7 +12,7 @@ const PostDetailPage = () => {
     const onClickFunc = () => {
         // : 버튼 눌렀을 때
         // 작성자일 때 : 수정, 삭제 / 작성자 아닐때는 버튼 없애기
-
+        
     }
 
     const handleCheckBox = () => {

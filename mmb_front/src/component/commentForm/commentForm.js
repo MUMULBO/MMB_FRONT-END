@@ -2,7 +2,7 @@ import React from 'react';
 import './commentForm.css';
 // import checkk from '../../../public/img/check.png'
 
-
+// 내가 쓴 댓글 (제목 포함)
 const commentForm = () => {
     return (
         <div className = "mycommentBigbox">
