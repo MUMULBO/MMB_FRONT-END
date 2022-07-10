@@ -4,6 +4,7 @@ import './comment.css'
 // import icon from './img/icon1.png';
 // import dot from './img/dot.png';
 
+// 상세페이지 댓글 하나
 const comment = () => {
     return (
         <>

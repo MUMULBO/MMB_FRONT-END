@@ -1,6 +1,7 @@
 import React from 'react';
 import './postForm.css';
 
+// 내가 쓴 질문글
 const postForm = () => {
     return (
         <div className = "mypostBigbox">
