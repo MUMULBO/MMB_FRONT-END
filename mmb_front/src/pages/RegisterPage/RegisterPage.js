@@ -128,7 +128,7 @@ const RegisterPage = () => {
                     onChange = {(e)=>{setNickName(e.target.value)}}></input>
                     {/* testcode 나중에 지우기 */}
                     {console.log(NickName)}
-                    <button id="btn1" onClick = {()=>{
+                    <button className="register-btns" id="btn1" onClick = {()=>{
                         nickname_check();
                         }}>{NickDup}</button>
                 </div>
@@ -143,7 +143,7 @@ const RegisterPage = () => {
                     {/* testcode 나중에 지울것 */}
                     {console.log(Email)}
                     <span className = "kumoh">@kumoh.ac.kr</span>
-                    <button id="btn2" onClick={()=>{
+                    <button className="register-btns" id="btn2" onClick={()=>{
                         email_check();
                     }}>인증</button>
                 </div>
@@ -157,7 +157,7 @@ const RegisterPage = () => {
                     {console.log(checkCerCode)}
 
                     {/* 인증버튼을 눌렀을 때 전달 받은 코드와 작성한 코드가 같다면 setSameCode 가 true 아니면 false */}
-                    <button id="btn3" onClick={()=>{
+                    <button className="register-btns" id="btn3" onClick={()=>{
                         setSameCode === true ? alert("인증성공") : alert("인증 실패");
                         //setIsEmail(true) : 이메일 인증 성공
                         setIsEmail(true);
@@ -206,7 +206,7 @@ const RegisterPage = () => {
 
             {/* 회원 등록 과정 */}
             {/* 버튼 눌렀을 때 닉네임 인증, 이메일 인증, 비밀번호 인증이 끝났을 시 회원 등록 요청 */}
-            <button type = "submit" className = "Register"
+            <button className="register-btns" type = "submit" className = "Register"
             onClick={()=>{
                 if(isDuplicated && isEmail && isPassword && isPasswordConfirm){
                         sign_up();

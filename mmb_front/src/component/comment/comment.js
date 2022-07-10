@@ -1,14 +1,14 @@
-import React,{Component} from 'react';
+import React from 'react';
 import './comment.css'
-import checkk from './img/check.png';
-import icon from './img/icon1.png';
-import dot from './img/dot.png';
+// import check from './img/check.png';
+// import icon from './img/icon1.png';
+// import dot from './img/dot.png';
 
 const comment = () => {
     return (
         <>
             <div className = "commentBox">
-                <img className = "check" src={checkk}></img>
+                {/* <img className = "check" src='/img/c'></img> */}
                 <div className = "userCommentBox">
                     <div className = "commentTitle">
                         <span className = "userName">홍길동</span>
@@ -19,9 +19,8 @@ const comment = () => {
                 </div>
                 <div className ="commentIcon">
                     <div className = "rightBox">
-                        <img className = "icon1" src={icon}></img>
                         <div className = "dotBox">
-                            <img className = "dot1" src={dot}></img>
+                            <img className = "dot1" src='/img/dot.png'></img>
                         </div>
                     </div>
                 </div>

@@ -15,7 +15,7 @@
     justify-content: center;
 }
 
-button{
+.register-btns {
     background-color: #4891FF;
     color: #ffffff;
     border: 0px;
