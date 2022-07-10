@@ -54,6 +54,8 @@ const RegisterPage = () => {
         },[password,password2])
 
         useEffect(()=>{
+            console.log(CerCode);
+            console.log(checkCerCode);
             if(parseInt(CerCode) === parseInt(checkCerCode)){
                 setSameCode(true);
             }
@@ -89,7 +91,7 @@ const RegisterPage = () => {
     }
 
     function sign_up(){
-        axios.post('http://127.0.0.1:8000/authapp/auth/signup',{            
+        axios.post('http://127.0.0.1:8000/authapp/signup',{            
                 nickname : NickName,
                 email: Email,
                 password: password,
@@ -147,7 +149,7 @@ const RegisterPage = () => {
 
                     {/* 인증버튼을 눌렀을 때 전달 받은 코드와 작성한 코드가 같다면 setSameCode 가 true 아니면 false */}
                     <button className="register-btns" id="btn3" onClick={()=>{
-                        setSameCode === true ? alert("인증성공") : alert("인증 실패");
+                        sameCode === true ? alert("인증성공") : alert("인증 실패");
                         //setIsEmail(true) : 이메일 인증 성공
                         setIsEmail(true);
                     }}>확인</button>
@@ -197,14 +199,11 @@ const RegisterPage = () => {
             {/* 버튼 눌렀을 때 닉네임 인증, 이메일 인증, 비밀번호 인증이 끝났을 시 회원 등록 요청 */}
             <button className="register-btns Register" type = "submit" 
             onClick={()=>{
-                if(isDuplicated && isEmail && isPassword && isPasswordConfirm){
+                if(isEmail && isPassword && isPasswordConfirm){
                         sign_up();
                     }
                     else{
-                        if(!isDuplicated){
-                            alert("닉네임이 올바르지 않습니다.");
-                        }
-                        else if(!isEmail){
+                        if(!isEmail){
                             alert("이메일이 올바르지 않습니다.");
                         }
                         else if(!isPassword){
