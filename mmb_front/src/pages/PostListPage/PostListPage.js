@@ -54,7 +54,7 @@ const PostListPage = () => {
             {postList.length !== 0 ? <List postList = {postList}/> : "불러올 글이 없습니다."}
 
             {/* 질문하기 버튼 글작성페이지로 Navigate!*/}
-            <Link to = "/PostWritePage"><button className = 'post'>질문하기</button></Link>
+            <Link to = "/post"><button className = 'post'>질문하기</button></Link>
         </div>
     );
 };
