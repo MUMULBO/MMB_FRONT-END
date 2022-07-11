@@ -27,6 +27,13 @@ const Mycomment = () => {
                     내가 작성한 댓글
                 </div>
                 <div className = "my_comment_list">
+                    <div className = "emptybox"/>
+                    <CommentForm/>
+                    <CommentForm/>
+                    <CommentForm/>
+                    <CommentForm/>
+                    <CommentForm/>
+                    <CommentForm/>
                     <CommentForm/>
                     <CommentForm/>
                     <CommentForm/>
