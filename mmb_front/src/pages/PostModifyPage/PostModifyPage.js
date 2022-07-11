@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, {useEffect, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import './PostModifyPage.css';
@@ -10,6 +11,24 @@ const PostModifyPage = () => {
     const [checkItemContent, setCheckItemContent] = useState(''); // 수정한 글 내용
     const [textareaHeight, setTextareaHeight] = useState(0);
 
+    const [title,setTitle] = useState("");
+    const [description,setDescription] = useState("");
+    const [image_src,setImg_src] = useState([]);
+    const [token,setToken] = useState("")
+    const [post_id,setPost_id] = useState(0);
+
+    useEffect(()=>{
+        //''http://127.0.0.1:8000/postapp/detail/{post_id+token}'
+        axios.get('http://127.0.0.1:8000/postapp/detail/{post_id+token}')
+        .then((res)=>{
+            setTitle(res.data.title);
+            setDescription(res.data.description);
+            setImg_src(res.data.image_src);
+            setPost_id(res.data.post_id);
+        })
+        .catch((err)=>{console.log(err)});
+    },[]);
+
     const navigate = useNavigate();
 
     // 사용자 입력 값이 변경될 때마다 checkItemContent에 저장하고
@@ -17,10 +36,10 @@ const PostModifyPage = () => {
     const checkItemChangeHandler = (event) => {
         setTextareaHeight(event.target.value.split('\n').length - 1);
         setCheckItemContent(event.target.value);
+        setDescription(event.currentTarget.value);
     }
     
     const handleImageUpload = (e) => {
-    
         const fileArr = e.target.files;
         let fileURLs = [];
         let file;
@@ -41,10 +60,17 @@ const PostModifyPage = () => {
     
     // 완료 시 호출되는 함수
     const onClickModified = () => {
-        // method : post
-        // req : 글 id, 글 제목, 글 내용, 사진들 
-        // res : 완료
-        // 글 수정 성공시 글 상세페이지로 이동
+        axios.post('http://127.0.0.1:8000/authapp/postapp/update', {
+            title : title,
+            description : description,
+            image_src : image_src,
+            token : token,
+            post_id : post_id
+        })
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{console.log(err)});
         navigate("/");
     }
     
@@ -81,23 +107,26 @@ const PostModifyPage = () => {
             </div>
             <div className = "Modify-container">
                 <div className ="Write-bigbox">
-                    <input className="title-input" type='text' placeholder='기존 글 제목'></input>
+                    <input className="title-input" type='text' placeholder = {`${title}`}
+                    onChange= {(e)=>{
+                        setTitle(e.currentTarget.value);
+                    }}></input>
                     <textarea
                         type='text'
                         className='text-area'
                         value={checkItemContent}
-                        placeholder={'기존 글 불러오기 ....'}
+                        placeholder= {`${description}`}
                         onChange={checkItemChangeHandler}
-                        style={{height: ((textareaHeight + 1) * 27) + 'px'}} 
-                    />
+                        style={{height: ((textareaHeight + 1) * 27) + 'px'}}/>
                     <div className = "preview">
-                        {images}  
+                        {postList.imageArr.map((e,i)=>{
+                            {e[i]}
+                        })}
                     </div>
                     <input className="img-submit" type="file" multiple ref={selectFile} onChange={handleImageUpload}/>
                     <button className="button2" onClick={() => selectFile.current.click()}>
                         <img src='/img/image.png' style={{width:"20px"}}/>&nbsp;사진 첨부하기
                     </button>
-                    
                 </div>
 
             </div>
