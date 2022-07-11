@@ -3,6 +3,7 @@ import './PostWritePage.css';
 import {useState,useRef,useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
+import imageCompression from 'browser-image-compression';
 
 const PostWritePage = () => {
 
@@ -81,10 +82,32 @@ const PostWritePage = () => {
         }
     };
 
+    const handleFileOnChange = async (e) => {
+        let file = e.target.files;	// 입력받은 file객체
+        // 이미지 resize 옵션 설정 (최대 width을 100px로 지정)
+        const options = { 
+            maxSizeMB: 2, 
+            maxWidthOrHeight: 100
+        }
+        try {
+            const compressedFile = await imageCompression(file, options);
+            //setFile(compressedFile);
+        
+          // resize된 이미지의 url을 받아 fileUrl에 저장
+            const promise = imageCompression.getDataUrlFromFile(compressedFile);
+            promise.then(result => {
+                //setFileUrl(result);
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // 완료 시 호출되는 함수
     const onClickModified = () => {
         //토큰 localStorage에서 가져오기!
         token = localStorage.getItem('login-token');
+        
         axios.post('http://127.0.0.1:8000/postsapp/upload/post',{
             title : title,
             description : checkItemContent,
