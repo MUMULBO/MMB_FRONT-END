@@ -16,7 +16,7 @@ const PostListPage = () => {
 
     //  setPostList롤 최신순으로 정렬된 데이터로 postList 생성
     useEffect(()=>{
-        axios.get('https://jsonplaceholder.typicode.com/users')
+        axios.get('http://127.0.0.1:8000/postsapp/posts')
         .then((res)=>{setPostList(res.data)})
         .catch((err)=>{console.log(err)});
     },[]);
@@ -78,13 +78,13 @@ function Filter1(props){ //디폴트가 최신순으로 선택시 postList 바�
 
         // radioSelected가 point 값이면 point순 정렬 데이터 요청
         if(e.target.value === "point"){
-            axios.get('https://jsonplaceholder.typicode.com/users')
+            axios.get('http://127.0.0.1:8000/')
             .then((res)=>{props.setPostList(res.data); console.log('point순으로 최신화')})
             .catch((err)=>{console.log(err)});
         }
         // radioSelected가 recent 값이면 recent순 정렬 데이터 요청
         else if(e.target.value === "recent"){
-            axios.get('https://jsonplaceholder.typicode.com/users')
+            axios.get('http://127.0.0.1:8000/')
             .then((res)=>{props.setPostList(res.data); console.log('recent순으로 최신화')})
             .catch((err)=>{console.log(err)});
         }
@@ -167,7 +167,7 @@ function Search(props){ // props : postList, inputList
                         //testcode!!
                         console.log(Selected);
                         console.log(props.input);
-                        axios.post('https://jsonplaceholder.typicode.com/posts',{
+                        axios.post('http://127.0.0.1:8000/postsapp/posts/{major_id + keyword}',{
                             major_id : major_id,
                             keyword : props.input,
                         })
