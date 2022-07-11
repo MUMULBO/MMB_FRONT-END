@@ -106,7 +106,7 @@ const PostWritePage = () => {
     // 완료 시 호출되는 함수
     const onClickModified = () => {
         //토큰 localStorage에서 가져오기!
-        token = localStorage.getItem('login-token');
+        setToken(localStorage.getItem('login-token'));
         
         axios.post('http://127.0.0.1:8000/postsapp/upload/post',{
             title : title,
