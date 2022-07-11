@@ -34,6 +34,11 @@ const Mypost = () => {
                     <PostList/>
                     <PostList/>
                     <PostList/>
+                    <PostList/>
+                    <PostList/>
+                    <PostList/>
+                    <PostList/>
+                    <PostList/>
                 </div>
             </div>
            

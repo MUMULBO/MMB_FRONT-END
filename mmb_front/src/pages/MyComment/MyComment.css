@@ -8,16 +8,20 @@
 }
 
 .my_comment_title{
+    background: white;
+    position: fixed;
     color:#4891FF;
-    width: 100%;
+    width: 400px;
     height: 65px;
     max-width: 500px;
     justify-content: center;
     display: flex;
     align-items: center;
     border-bottom: 2px solid #4891FF;
+    z-index: 2;
 }
 
 .my_comment_list{
-    margin: 3px;
+    position: relative;
+    padding-top: 65px;
 }
