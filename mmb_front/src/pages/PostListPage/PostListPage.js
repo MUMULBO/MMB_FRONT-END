@@ -7,6 +7,7 @@ import axios from 'axios'
 //props로 useEffect의 값을 내려받으면 값이 변경되지 않을 수 있으므로 확인 요망!
 
 const PostListPage = () => {
+
     // 검색 모달창 false : 숨기기 true : 나오기
     let [serach, setSearch] = useState(false);
 
@@ -15,18 +16,18 @@ const PostListPage = () => {
 
     //  setPostList롤 최신순으로 정렬된 데이터로 postList 생성
     useEffect(()=>{
-        // 최신순 데이터 url로 교체 
-        axios.get('http://127.0.0.1:8000/Postsapp/post/?point=&keyword=&major_id=')
-        .then((res)=>{setPostList(res)})
+        axios.get('https://jsonplaceholder.typicode.com/users')
+        .then((res)=>{setPostList(res.data)})
         .catch((err)=>{console.log(err)});
     },[]);
 
     // input : 검색창 입력데이터
     let [input,setInput] = useState(""); 
 
-    const navigate  = useNavigate();
+    const navigate = useNavigate();
+
     return (
-        <div>
+        <div className = "Post-List-Box">
             {/* //헤더부분 */}
             <header className = "head">
                 {/* 최신, 포인트순 필터 */}
@@ -58,8 +59,8 @@ const PostListPage = () => {
             {/* 글목록 필터링된 postList가 출력 해당하는 내용이 없을 경우 "불러올 글이 없습니다" 출력!*/}
             {postList.length !== 0 ? <List postList = {postList}/> : "불러올 글이 없습니다."}
 
-            {/* 질문하기 버튼 글작성페이지로 Link!*/}
-            <Link to = "/PostWritePage"><button className = 'post'>질문하기</button></Link>
+            {/* 질문하기 버튼 글작성페이지로 Navigate!*/}
+            <Link to = "/postWrite"><div className = 'post'>질문하기</div></Link>
         </div>
     );
 };
@@ -67,7 +68,7 @@ const PostListPage = () => {
 function Filter1(props){ //디폴트가 최신순으로 선택시 postList 바꾸기 // props로 postList와 input값을 받음
 
     // radioSelected : 최신순 혹은 포인트순 중 선택된 값 초기값은 recent // recent / point 
-    const [radioSelected, setRadioSelected] = useState("");
+    const [radioSelected, setRadioSelected] = useState("recent");
     //console.log(radioSelected);//test code 나중에 삭제하기!!
 
     // radioSelected 값이 변경되었을 경우 해당 값을 radioSelected로 최신화
@@ -77,21 +78,19 @@ function Filter1(props){ //디폴트가 최신순으로 선택시 postList 바�
 
         // radioSelected가 point 값이면 point순 정렬 데이터 요청
         if(e.target.value === "point"){
-            //!!point순 데이터 url로 교체
-            axios.get('http://127.0.0.1:8000/postapp/posts/point=true')
-            .then((res)=>{props.setPostList(res.data); console.log('포인트순으로 최신화')})
+            axios.get('https://jsonplaceholder.typicode.com/users')
+            .then((res)=>{props.setPostList(res.data); console.log('point순으로 최신화')})
             .catch((err)=>{console.log(err)});
         }
         // radioSelected가 recent 값이면 recent순 정렬 데이터 요청
-        else if(e.target.value === "point="){
-            // !!최신순 데이터 url로 교체
-            axios.get('http://127.0.0.1:8000/postapp/point=')
-            .then((res)=>{props.setPostList(res.data); console.log('최신순으로 최신화')})
+        else if(e.target.value === "recent"){
+            axios.get('https://jsonplaceholder.typicode.com/users')
+            .then((res)=>{props.setPostList(res.data); console.log('recent순으로 최신화')})
             .catch((err)=>{console.log(err)});
         }
         // recent / point 값이 아닌 값이 들어왔을때 오류 문장 출력...
         else{
-            alert("Error : 뭔가가 잘못되었습니다...ㅠㅠ");
+            console.log("Error : 뭔가가 잘못되었습니다...ㅠㅠ");
         }
     }
     return(
@@ -105,7 +104,7 @@ function Filter1(props){ //디폴트가 최신순으로 선택시 postList 바�
                         type="radio" 
                         name="recent" 
                         value="recent"
-                        checked = {radioSelected === "point="}
+                        checked = {radioSelected === "recent"}
                         onChange = {useHandleClickRadioButton}
                     />
                     <label for = "recentRadios">최신순</label>
@@ -115,7 +114,7 @@ function Filter1(props){ //디폴트가 최신순으로 선택시 postList 바�
                         type="radio" 
                         name="point" 
                         value="point"
-                        checked = {radioSelected === "point=true"}
+                        checked = {radioSelected === "point"}
                         onChange = {useHandleClickRadioButton}
                     />
                     <label for = "pointRadios">포인트순</label>
@@ -130,7 +129,7 @@ function Search(props){ // props : postList, inputList
 
      //2차필터링 선택된 값 : Selected / 일상, 학과..
     const [Selected, setSelected] = useState("All");
-    const [major_id,setMajor_id] = useState("일상");
+    const [major_id,setMajor_id] = useState(1);
 
     const selectList =
     ["일상","전자공학부","건축학부","산업공학부","화학소재공학부","신소재공학부","기계공학과","기계설계공학과","기계시스템공학과",
@@ -140,8 +139,8 @@ function Search(props){ // props : postList, inputList
      //Seleted값이 바뀌었을 때 해당 값으로갱신
     const handleSelect = (e) => {
         setSelected(e.target.value);
+        setMajor_id(e.currentTarget.selectedIndex);
     };
-
     return(
         <>  
             <div className = "Search">
@@ -168,14 +167,14 @@ function Search(props){ // props : postList, inputList
                         //testcode!!
                         console.log(Selected);
                         console.log(props.input);
-                        axios.post('http://127.0.0.1:8000/postsapp/posts/majoridkeyword',{
+                        axios.post('https://jsonplaceholder.typicode.com/posts',{
                             major_id : major_id,
                             keyword : props.input,
                         })
                         //성공 시 필터링 된 리스트를 반환!
                         .then((res)=>{props.setPostList(res)})
                         .catch((error)=>{console.log(error)})
-                    }} src = "images/Search2.png"></img>
+                    }} src = "images/Search.png"></img>
                 </div>
             </div>
         </>
@@ -183,16 +182,15 @@ function Search(props){ // props : postList, inputList
 }
 
 function List(props){
-    const navigate  = useNavigate();
     return(
-        <div className = "Lists" >
+        <div className = "Lists">
             {/* 상위에서 필터링된 데이터를 props로 받아서 출력 디폴트가 전체 */}
                 {
                     props.postList.map((e,i)=>{
                         return(
                             <div  className = "List" key = {i} onClick ={()=>{
                                 //해당 상세피이지로 이동
-                                navigate(`http://127.0.0.1:8000/postsapp/detail/${e.id}`)
+                                console.log(i);
                             }}>
                                 <div className = "ListNum">3{e.point}</div>
                                 <div className = "ListContent">
@@ -202,15 +200,15 @@ function List(props){
                                         <li>올해 4학년인데요 제가 문과 출신이라 그런지 너무 힘들더..{e.content}</li>
                                         <div className = "ListLast">
                                             <div className = "ListLast2">
-                                            <li>컴퓨터공학과{e.catergory}</li>
-                                            <div className = "detail">
-                                            <li><img src = "images/Comment.png"/>{e.CommentCnt}14</li>
-                                            <li>07-07 15:34{e.date}</li>
+                                                <li>컴퓨터공학과{e.catergory}</li>
+                                                <div className = "detail">
+                                                    <li><img src = "images/comment.png"/>{e.countComment}14</li>
+                                                    <li>07-07 15:34{e.date}</li>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </ul>
                                 </div>
-                            </ul>
-                        </div>
                     </div>
                 )})                    
                 }
